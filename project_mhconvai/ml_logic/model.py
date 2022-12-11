@@ -1,11 +1,14 @@
-### Import
-from transformers import BlenderbotTokenizer, BlenderbotForConditionalGeneration
+
+### Functions
+
+def instantiate(tokenizer_source, model_source, name):
+    tokenizer = tokenizer_source.from_pretrained(name)
+    model = model_source.from_pretrained(name)
+    return tokenizer, model
 
 
-### Function
-
-# Predict from user input, dialog history with a given tokenizer and a given model
-def predict_output(text, history, tokenizer_blend, model_blend):
+# Predict from input with a blender tokenizer and the blender model
+def predict_blender_output(text, tokenizer_blend, model_blend):
     # Tokenize input
     input_token = tokenizer_blend(text, return_tensors='pt')
     # Get result from model

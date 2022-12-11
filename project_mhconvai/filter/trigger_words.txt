@@ -7,8 +7,11 @@ death
 dead
 murder
 self-murder
+self murder
 self-slaughter
+self slaughter
 self-suicide
+self suicidal
 cut my throat
 cutting my throat
 cut my veins

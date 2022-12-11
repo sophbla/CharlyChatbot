@@ -1,5 +1,5 @@
-numpy
-pandas
+numpy # Where do we need that?
+pandas # Where do we need that?
 scipy # apply softmax function for specific filters
 importlib # import text files
 better_profanity # filter bad words and trigger words

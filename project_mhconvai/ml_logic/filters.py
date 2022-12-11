@@ -2,21 +2,23 @@
 ### Import
 
 from better_profanity import profanity
-
-import numpy as np #### Do we need it here?
-from transformers import AutoTokenizer
-from transformers import AutoModelForSequenceClassification
-from transformers import TFAutoModelForSequenceClassification
 from scipy.special import softmax
-
+import importlib.resources as ir
 
 
 ### Functions
+
+def word_list(source, file):
+    words = ir.read_text(source, file)
+    word_list = [line.rstrip() for line in words.split('\n')]
+    return word_list
+
 
 # Check if sentence contains bad words (True or false)
 def filter_bad_words(sentence, bad_words):
     profanity.load_censor_words(bad_words)
     return profanity.contains_profanity(sentence)
+
 
 # Check if sentence contains trigger words (True or false)
 def filter_trigger_words(sentence, trigger_words):
@@ -24,7 +26,7 @@ def filter_trigger_words(sentence, trigger_words):
     return profanity.contains_profanity(sentence)
 
 
-# Function for predicting neutrality / Return true or false
+# Predict neutrality / Return true or false
 def predict_neutrality(text, tokenizer_neut, model_neut):
     # Get prediction
     encoded_input = tokenizer_neut(text, return_tensors='pt')
@@ -43,7 +45,7 @@ def predict_neutrality(text, tokenizer_neut, model_neut):
         return False
 
 
-# Function for predicting offensive language / Returns True or False
+# Predict offensive language / Returns True or False
 def predict_offensive(text, tokenizer_off, model_off):
     # Get prediction
     encoded_input = tokenizer_off(text, return_tensors='pt')
