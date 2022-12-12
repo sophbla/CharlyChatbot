@@ -112,7 +112,7 @@ if __name__ == '__main__':
         history = ''
         while n < 3:
             user_input = input('Enter input:')
-            output, history = predict_with_filters(user_input, history)
+            output, history, end_dialog = predict_with_filters(user_input, history)
             print(output)
             n += 1
 

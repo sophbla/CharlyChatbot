@@ -1,12 +1,9 @@
 numpy # Where do we need that?
 pandas # Where do we need that?
 scipy # apply softmax function for specific filters
-importlib # import text files
 better_profanity # filter bad words and trigger words
 transformers # models and tokenizers
 torch # do we really need that?
 torchvision # do we really need that?
-tensorflow # do we really need that?
 fastapi         # API framework
-pytz            # time zone management
 uvicorn
