@@ -15,15 +15,10 @@ def word_list(source, file):
 
 
 # Check if sentence contains bad words (True or false)
-def filter_bad_words(sentence, bad_words):
-    profanity.load_censor_words(bad_words)
+def filter_words(sentence, words):
+    profanity.load_censor_words(words)
     return profanity.contains_profanity(sentence)
 
-
-# Check if sentence contains trigger words (True or false)
-def filter_trigger_words(sentence, trigger_words):
-    profanity.load_censor_words(trigger_words)
-    return profanity.contains_profanity(sentence)
 
 
 # Predict neutrality / Return true or false

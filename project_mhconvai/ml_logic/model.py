@@ -1,10 +1,10 @@
 
 ### Functions
 
-def instantiate(tokenizer_source, model_source, name):
-    tokenizer = tokenizer_source.from_pretrained(name)
-    model = model_source.from_pretrained(name)
-    return tokenizer, model
+# def instantiate(tokenizer_source, model_source, name):
+#     tokenizer = tokenizer_source.from_pretrained(name)
+#     model = model_source.from_pretrained(name)
+#     return tokenizer, model
 
 
 # Predict from input with a blender tokenizer and the blender model
