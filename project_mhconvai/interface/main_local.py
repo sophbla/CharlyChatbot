@@ -74,14 +74,11 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
 
     # Create input for model from dialog history and user input
     model_input = ' '.join((history, text))
-    print('Model input: ', model_input)
 
     # Get first model response
     output = predict_blender_output(model_input, tokenizer_blend, model_blend)
-    #output = '<s> I hate you</s>'
     output_test = output.replace('<s>','')
     output_test = output_test.replace('</s>','')
-
 
     # Filter first model output for offensive language
     print("First offensive language filter: ", predict_offensive(output_test, tokenizer_off, model_off))
@@ -90,7 +87,6 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
         # If there is offensive language present, try to generate new outputs 3 more times
         while n < 3:
             output = predict_blender_output(model_input, tokenizer_blend, model_blend)
-            #output = '<s> I hate you</s>'
             output_test = output.replace('<s>','')
             output_test = output_test.replace('</s>','')
             print("Inside offensive language filter: ", predict_offensive(output_test, tokenizer_off, model_off))
