@@ -33,7 +33,11 @@ print('#### Instantiated offensive language filter tokenizer')
 model_off = AutoModelForSequenceClassification.from_pretrained("cardiffnlp/twitter-roberta-base-offensive")
 print('#### Instantiated offensive language filter model')
 
-
+# Instantiate emotive language filter: model and tokenizer
+tokenizer_emo = AutoTokenizer.from_pretrained("cardiffnlp/twitter-roberta-base-emotion")
+print('#### Instantiated emotive language filter tokenizer')
+model_emo = AutoModelForSequenceClassification.from_pretrained("cardiffnlp/twitter-roberta-base-emotion")
+print('#### Instantiated emotive language filter model')
 
 ############################
 ### Predicting #############
@@ -69,6 +73,11 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
         return output, history, end_dialog
 
 ## Here the emotion analysis might step in.
+    print("Emo filter: ", predict_emotion(text, tokenizer_emo, model_emo))
+    if predict_emotion(text, tokenizer_emo, model_emo):
+        output = "<s> Could you explain this to me in a calmer manner, please?</s>"
+        end_dialog = False
+        return output, history, end_dialog
 
     # If neither triggers nor bad words are present, and if the user input is not neutral: generate a model output
 
@@ -99,7 +108,6 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     #Append history, user input and model output to new history
     new_history = ' '.join((history, text, output))
     end_dialog = False
-
     return output, new_history, end_dialog
 
 
@@ -110,8 +118,8 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
 ### Testing    #############
 ############################
 
-text = "I am sad"
-history = "Diagolg history"
+text = "Test"
+history = "Dialogue history"
 
 output, history, end_dialog = predict_with_filters(text, history)
 

@@ -19,7 +19,19 @@ def filter_words(sentence, words):
     profanity.load_censor_words(words)
     return profanity.contains_profanity(sentence)
 
-
+def predict_emotion(text, tokenizer_emo, model_emo):
+    labels_emo = ['anger', 'joy', 'optimism', 'sadness']
+    encoded_input = tokenizer_emo(text, return_tensors='pt')
+    output = model_emo(**encoded_input)
+    scores = output[0][0].detach().numpy()
+    scores = softmax(scores)
+    emotions = {}
+    for i in range(len(scores)):
+        emotions[labels_emo[i]] = scores[i]
+    if emotions['anger'] >= 0.91:
+        return True
+    else:
+        return False
 
 # Predict neutrality / Return true or false
 def predict_neutrality(text, tokenizer_neut, model_neut):

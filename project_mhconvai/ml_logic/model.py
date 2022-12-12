@@ -15,4 +15,5 @@ def predict_blender_output(text, tokenizer_blend, model_blend):
     result = model_blend.generate(**input_token)
     # Decode result to model answer
     output = tokenizer_blend.decode(result[0])
+    print(output)
     return output
