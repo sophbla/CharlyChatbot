@@ -5,8 +5,8 @@
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import BlenderbotTokenizer, BlenderbotForConditionalGeneration
-from project_mhconvai.ml_logic.filters import word_list, filter_words, predict_neutrality, predict_offensive
-from project_mhconvai.ml_logic.model import predict_blender_output #instantiate
+from project_mhconvai.ml_logic.filters import word_list, filter_words, predict_neutrality, predict_offensive, predict_emotion
+from project_mhconvai.ml_logic.model import predict_blender_output
 
 
 
@@ -39,11 +39,14 @@ print('#### Instantiated emotive language filter tokenizer')
 model_emo = AutoModelForSequenceClassification.from_pretrained("cardiffnlp/twitter-roberta-base-emotion")
 print('#### Instantiated emotive language filter model')
 
+
+
 ############################
 ### Predicting #############
 ############################
 
-def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, model_neut=model_neut, tokenizer_blend=tokenizer_blend, model_blend=model_blend, tokenizer_off=tokenizer_off, model_off=model_off):
+
+def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, model_neut=model_neut,  tokenizer_blend=tokenizer_blend, model_blend=model_blend, tokenizer_off=tokenizer_off, model_off=model_off):
 
     # Get lists of trigger words and bad words
     trigger_words = word_list('project_mhconvai.filter', 'trigger_words.txt')
@@ -72,7 +75,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
         end_dialog = False
         return output, history, end_dialog
 
-## Here the emotion analysis might step in.
+    # Check for a very angry input
     print("Emo filter: ", predict_emotion(text, tokenizer_emo, model_emo))
     if predict_emotion(text, tokenizer_emo, model_emo):
         output = "<s> Could you explain this to me in a calmer manner, please?</s>"
@@ -86,6 +89,8 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
 
     # Get first model response
     output = predict_blender_output(model_input, tokenizer_blend, model_blend)
+
+    # Prepare model output for the offensive language filter
     output_test = output.replace('<s>','')
     output_test = output_test.replace('</s>','')
 
@@ -96,6 +101,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
         # If there is offensive language present, try to generate new outputs 3 more times
         while n < 3:
             output = predict_blender_output(model_input, tokenizer_blend, model_blend)
+            # Prepare model output for the offensive language filter
             output_test = output.replace('<s>','')
             output_test = output_test.replace('</s>','')
             print("Inside offensive language filter: ", predict_offensive(output_test, tokenizer_off, model_off))
@@ -118,7 +124,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
 ### Testing    #############
 ############################
 
-text = "Test"
+text = "I am super angry!!!!"
 history = "Dialogue history"
 
 output, history, end_dialog = predict_with_filters(text, history)
@@ -126,21 +132,3 @@ output, history, end_dialog = predict_with_filters(text, history)
 print(output)
 print(history)
 print(end_dialog)
-
-
-
-# if __name__ == '__main__':
-#     try:
-#         n = 0
-#         history = ''
-#         while n < 3:
-#             user_input = input('Enter input:')
-#             output, history = predict_with_filters(user_input, history)
-#             print(output)
-#             n += 1
-
-#     except:
-#         import ipdb, traceback, sys
-#         extype, value, tb = sys.exc_info()
-#         traceback.print_exc()
-#         ipdb.post_mortem(tb)
