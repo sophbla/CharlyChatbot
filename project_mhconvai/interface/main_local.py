@@ -86,7 +86,7 @@ def predict_with_filters(text="", history=""):
         # If there is offensive language present, try to generate new outputs 3 more times
         while n < 3:
             output = predict_blender_output(model_input, tokenizer_blend, model_blend)
-            if predict_blender_output(output, tokenizer_off, model_off):
+            if predict_offensive(output, tokenizer_off, model_off):
                 n += 1
 
             # Break the cycle once there is no offensive language
