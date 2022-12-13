@@ -1,23 +1,20 @@
-i want to commit suicide
-i'm thinking of committing suicide
-i've tried to commit sucicide
-i have tried to commit suicide
-i've tried to kill myself
-i have tried to kill myself
-i am thinking about killing myself
-i am thinking of committing suicide
-i am committing suicide
-i don't want to live anymore
-i want my life to end
-i want to be dead
+want to commit suicide
+ithinking of committing suicide
+tried to commit suicide
+tried to kill myself
+have tried to kill myself
+am thinking about killing myself
+am thinking of committing suicide
+am committing suicide
+don't want to live anymore
+want my life to end
+want to be dead
 death is my only option
 i'm suicidal
-i want to kill myself
-i'm thinking of killing myself
+thinking of killing myself
 i want to kill
-i've been raped
-i need to be dead
-i want to kill
+been raped
+need to be dead
 self-murder
 self murder
 self-slaughter
@@ -41,3 +38,5 @@ take sleeping pills
 taking sleeping pills
 not want to wake up
 no longer want to wake up
+don't want to wake up
+never want to wake up again
