@@ -51,6 +51,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     # Get lists of trigger words and bad words
     trigger_words = word_list('project_mhconvai.filter', 'trigger_words.txt')
     bad_words = word_list('project_mhconvai.filter', 'bad_words.txt')
+    end_words = word_list('project_mhconvai.filter', 'end_words.txt')
 
     # Check for potential triggers
     print("Trigger filter: ", filter_words(text, trigger_words))
@@ -66,6 +67,12 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     if filter_words(text, bad_words):
         output = "<s> Let's try and say this a bit nicer</s>."
         end_dialog = False
+        return output, history, end_dialog
+
+    print("End dialogue filter: ", filter_words(text, end_words))
+    if filter_words(text, end_words):
+        output = "<s> Bye. It was nice talking to you. Please get back in touch anytime if you want to talk.</s>"
+        end_dialog = True
         return output, history, end_dialog
 
     # Check for potential neutrality
@@ -88,7 +95,8 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     model_input = ' '.join((history, text))
 
     # Get first model response
-    output = predict_blender_output(model_input, tokenizer_blend, model_blend)
+    output = "Bye. It was nice talking to you. Please get back in touch anytime if you want to talk."
+    #predict_blender_output(model_input, tokenizer_blend, model_blend)
 
     # Prepare model output for the offensive language filter
     output_test = output.replace('<s>','')
@@ -116,16 +124,12 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     end_dialog = False
     return output, new_history, end_dialog
 
-
-
-
-
 ############################
 ### Testing    #############
 ############################
 
-text = "I have been with a guy for 4 years,  he's a great guy and we also have a son together. The problem is that I'm in love with a guy that I've been talking to for about 2 years but I've never met him in person. Honestly I'm bored with the relationship I have with the first guy and he makes want to go after the second guy, I don't know how to tell him that. What should I do?"
-
+text = "im a teenage girl and i feel very bad about my weight i dont know how to make it stop"
+history = ""
 output, history, end_dialog = predict_with_filters(text, history)
 
 print(output)
