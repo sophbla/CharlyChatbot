@@ -11,6 +11,7 @@ project_mhconvai/api/__init__.py
 project_mhconvai/api/fast.py
 project_mhconvai/filter/__init__.py
 project_mhconvai/filter/bad_words.txt
+project_mhconvai/filter/end_words.txt
 project_mhconvai/filter/trigger_words.txt
 project_mhconvai/interface/__init__.py
 project_mhconvai/interface/main_local.py
