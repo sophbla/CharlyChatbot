@@ -65,7 +65,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     # Check for potential bad words
     print("Bad words filter: ", filter_words(text, bad_words))
     if filter_words(text, bad_words):
-        output = "<s> Let's try and say this a bit nicer, please. </s>"
+        output = "<s> I'm sorry, but I don't like to respond to degrading language. Please could you rewrite your message in a nicer way?</s>"
         end_dialog = False
         return output, history, end_dialog
 
@@ -85,7 +85,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     # Check for a very angry input
     print("Emo filter: ", predict_emotion(text, tokenizer_emo, model_emo))
     if predict_emotion(text, tokenizer_emo, model_emo):
-        output = "<s> Could you explain this to me in a calmer manner, please?</s>"
+        output = "<s> It sounds like you're pretty angry right now. Feeling that way at times is completely normal. It is important to cope with this anger in a healthy and responsible way. Often it helps to talk to someone you trust. It may also make sense to do something you enjoy. If none of these things help, maybe a crisis hotline could support you. These hotlines are staffed by trained professionals who can provide you with support and guidance, such as the Samaritans. Their hotline is available 24/7 and provides support for anyone in need. You can call them at 116 123. Shout Crisis Text Line: This hotline provides support through text message. You can text 'SHOUT' to 8525 to connect with a trained crisis counselor. It is important to remember that you are not alone and that there are people who care about you and want to help.</s>"
         end_dialog = False
         return output, history, end_dialog
 
