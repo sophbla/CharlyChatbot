@@ -7,3 +7,4 @@ torch # do we really need that?
 torchvision # do we really need that?
 fastapi         # API framework
 uvicorn
+streamlit-chat
