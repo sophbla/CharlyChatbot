@@ -56,7 +56,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     # Check for potential triggers
     print("Trigger filter: ", filter_words(text, trigger_words))
     if filter_words(text, trigger_words):
-        output = "<s> A therapist will be in contact with you shortly.</s>"
+        output = "<s> I understand that you are feeling very distressed and that you may not be thinking clearly right now. It is important to remember that there is always a way forward, even when things seem difficult. If you are in immediate danger, please call your local emergency services or go to your nearest hospital. They will be able to help you and provide you with the support you need. If you are not in immediate danger but are still feeling very distressed, it may be helpful to call a crisis hotline. These hotlines are staffed by trained professionals who can provide you with support and guidance. Samaritans: This hotline is available 24/7 and provides support for anyone in need. You can call them at 116 123. Shout Crisis Text Line: This hotline provides support through text message. You can text 'SHOUT' to 8525 to connect with a trained crisis counselor. It is important to remember that you are not alone and that there are people who care about you and want to help.</s>"
         end_dialog = True
         return output, history, end_dialog
 
@@ -65,20 +65,20 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     # Check for potential bad words
     print("Bad words filter: ", filter_words(text, bad_words))
     if filter_words(text, bad_words):
-        output = "<s> Let's try and say this a bit nicer</s>."
+        output = "<s> Let's try and say this a bit nicer, please. </s>"
         end_dialog = False
         return output, history, end_dialog
 
     print("End dialogue filter: ", filter_words(text, end_words))
     if filter_words(text, end_words):
-        output = "<s> Bye. It was nice talking to you. Please get back in touch anytime if you want to talk.</s>"
+        output = "<s> Thank you and goodbye. It was lovely talking to you. Please get back in touch anytime if you want to talk.</s>"
         end_dialog = True
         return output, history, end_dialog
 
     # Check for potential neutrality
     print("Neutrality filter: ", predict_neutrality(text, tokenizer_neut, model_neut))
     if predict_neutrality(text, tokenizer_neut, model_neut):
-        output = "<s> Could you go into a bit more detail with this?</s>"
+        output = "<s> Could you go into a bit more detail, please?</s>"
         end_dialog = False
         return output, history, end_dialog
 
@@ -95,8 +95,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     model_input = ' '.join((history, text))
 
     # Get first model response
-    output = "Bye. It was nice talking to you. Please get back in touch anytime if you want to talk."
-    #predict_blender_output(model_input, tokenizer_blend, model_blend)
+    output = predict_blender_output(model_input, tokenizer_blend, model_blend)
 
     # Prepare model output for the offensive language filter
     output_test = output.replace('<s>','')
@@ -128,7 +127,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
 ### Testing    #############
 ############################
 
-text = "im a teenage girl and i feel very bad about my weight i dont know how to make it stop"
+text = "I am thinking of killing myself every day"
 history = ""
 output, history, end_dialog = predict_with_filters(text, history)
 
