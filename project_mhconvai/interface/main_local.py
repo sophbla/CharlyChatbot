@@ -71,7 +71,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     # Check for potential neutrality
     print("Neutrality filter: ", predict_neutrality(text, tokenizer_neut, model_neut))
     if predict_neutrality(text, tokenizer_neut, model_neut):
-        output = "<s> Could you explain further?</s>"
+        output = "<s> Could you go into a bit more detail with this?</s>"
         end_dialog = False
         return output, history, end_dialog
 
@@ -124,8 +124,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
 ### Testing    #############
 ############################
 
-text = "I am super angry!!!!"
-history = "Dialogue history"
+text = "I have been with a guy for 4 years,  he's a great guy and we also have a son together. The problem is that I'm in love with a guy that I've been talking to for about 2 years but I've never met him in person. Honestly I'm bored with the relationship I have with the first guy and he makes want to go after the second guy, I don't know how to tell him that. What should I do?"
 
 output, history, end_dialog = predict_with_filters(text, history)
 

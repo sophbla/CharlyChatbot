@@ -46,7 +46,7 @@ def predict_neutrality(text, tokenizer_neut, model_neut):
     for i in range(len(scores)):
         neutrality[labels_neut[i]] = scores[i]
     # Check if user input is neutral or not
-    if neutrality['neutral'] > neutrality['negative'] and neutrality['neutral'] > neutrality['positive']:
+    if neutrality['neutral'] >= 0.5:
         return True
     else:
         return False
