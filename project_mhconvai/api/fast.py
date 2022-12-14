@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import sys
+
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import BlenderbotTokenizer, BlenderbotForConditionalGeneration
@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-
+print('---New---')
 tokenizer_neut = AutoTokenizer.from_pretrained("cardiffnlp/twitter-roberta-base-sentiment")
 print('#### Instantiated neutrality filter tokenizer')
 model_neut = AutoModelForSequenceClassification.from_pretrained("cardiffnlp/twitter-roberta-base-sentiment")
@@ -41,15 +41,14 @@ print('#### Instantiated emotive language filter tokenizer')
 model_emo = AutoModelForSequenceClassification.from_pretrained("cardiffnlp/twitter-roberta-base-emotion")
 print('#### Instantiated emotive language filter model')
 
+# Get lists of trigger words and bad words
+trigger_words = word_list('project_mhconvai.filter', 'trigger_words.txt')
+bad_words = word_list('project_mhconvai.filter', 'bad_words.txt')
+end_words = word_list('project_mhconvai.filter', 'end_words.txt')
+
 @app.get("/predict")
-def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, model_neut=model_neut, \
-    tokenizer_blend=tokenizer_blend, model_blend=model_blend, tokenizer_off=tokenizer_off, model_off=model_off):
-
-    # Get lists of trigger words and bad words
-    trigger_words = word_list('project_mhconvai.filter', 'trigger_words.txt')
-    bad_words = word_list('project_mhconvai.filter', 'bad_words.txt')
-    end_words = word_list('project_mhconvai.filter', 'end_words.txt')
-
+def predict_with_filters(text="", history=""):
+    print("---Start---")
     # Check for potential triggers
     print("Trigger filter: ", filter_words(text, trigger_words))
     if filter_words(text, trigger_words):
@@ -64,36 +63,36 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
             You can text 'SHOUT' to 8525 to connect with a trained crisis counselor.\
             It is important to remember that you are not alone and that there are people who care about you and want to help.</s>"
         end_dialog = True
-        return output, history, end_dialog
+        return dict(output=output, new_history=history, end_dialog=end_dialog)
 
 #### Here we should find out, if the user wants to end the dialog
 
     # Check for potential bad words
     print("Bad words filter: ", filter_words(text, bad_words))
     if filter_words(text, bad_words):
-        output = "<s> Let's try and say this a bit nicer, please. </s>"
+        output = "<s> I'm sorry, but I don't like to respond to degrading language. Please could you rewrite your message in a nicer way?</s>"
         end_dialog = False
-        return output, history, end_dialog
+        return dict(output=output, new_history=history, end_dialog=end_dialog)
 
     print("End dialogue filter: ", filter_words(text, end_words))
     if filter_words(text, end_words):
         output = "<s> Thank you and goodbye. It was lovely talking to you. Please get back in touch anytime if you want to talk.</s>"
         end_dialog = True
-        return output, history, end_dialog
+        return dict(output=output, new_history=history, end_dialog=end_dialog)
 
     # Check for potential neutrality
     print("Neutrality filter: ", predict_neutrality(text, tokenizer_neut, model_neut))
     if predict_neutrality(text, tokenizer_neut, model_neut):
         output = "<s> Could you go into a bit more detail, please?</s>"
         end_dialog = False
-        return output, history, end_dialog
+        return dict(output=output, new_history=history, end_dialog=end_dialog)
 
     # Check for a very angry input
     print("Emo filter: ", predict_emotion(text, tokenizer_emo, model_emo))
     if predict_emotion(text, tokenizer_emo, model_emo):
-        output = "<s> Could you explain this to me in a calmer manner, please?</s>"
+        output = "<s> It sounds like you're pretty angry right now. Feeling that way at times is completely normal. It is important to cope with this anger in a healthy and responsible way. Often it helps to talk to someone you trust. It may also make sense to do something you enjoy. If none of these things help, maybe a crisis hotline could support you. These hotlines are staffed by trained professionals who can provide you with support and guidance, such as the Samaritans. Their hotline is available 24/7 and provides support for anyone in need. You can call them at 116 123. Shout Crisis Text Line: This hotline provides support through text message. You can text 'SHOUT' to 8525 to connect with a trained crisis counselor. It is important to remember that you are not alone and that there are people who care about you and want to help.</s>"
         end_dialog = False
-        return output, history, end_dialog
+        return dict(output=output, new_history=history, end_dialog=end_dialog)
 
     # If neither triggers nor bad words are present, and if the user input is not neutral: generate a model output
 
@@ -108,7 +107,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     output_test = output_test.replace('</s>','')
 
     # Filter first model output for offensive language
-    # print("First offensive language filter: ", predict_offensive(output_test, tokenizer_off, model_off))
+    print("First offensive language filter: ", predict_offensive(output_test, tokenizer_off, model_off))
     if predict_offensive(output_test, tokenizer_off, model_off):
         n = 0
         # If there is offensive language present, try to generate new outputs 3 more times
@@ -127,7 +126,7 @@ def predict_with_filters(text="", history="", tokenizer_neut=tokenizer_neut, mod
     #Append history, user input and model output to new history
     new_history = ' '.join((history, text, output))
     end_dialog = False
-    return output, new_history, end_dialog
+    return dict(output=output, new_history=new_history, end_dialog=end_dialog)
 
 @app.get("/")
 def root():
