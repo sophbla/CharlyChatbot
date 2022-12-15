@@ -28,7 +28,7 @@ m = st.markdown("""
 <style>
 div.stButton > button:first-child {
     height: 2em;
-    width: 5em;
+    width:6em;
     border-radius:5px;
     border:1px solid #000000;
     font-size:25px;
@@ -52,7 +52,7 @@ div.stButton > button:active {
 </style>""", unsafe_allow_html=True)
 
 
-f1, f2 = st.columns([3,0.7])
+f1, f2 = st.columns([3,0.85])
 with f1:
     #Side bar button
     if st.button('Toggle sidebar'):
