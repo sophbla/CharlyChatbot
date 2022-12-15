@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!-- PROJECT LOGO -->
 <br />
 <div align="r">

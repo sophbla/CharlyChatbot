@@ -1,18 +1,10 @@
 numpy # Where do we need that?
 pandas # Where do we need that?
 scipy # apply softmax function for specific filters
-<<<<<<< HEAD
-# importlib # import text files
-=======
->>>>>>> b48fcad61041beccce77779385afa87934dfe0d5
 better_profanity # filter bad words and trigger words
 transformers # models and tokenizers
 torch # do we really need that?
 torchvision # do we really need that?
-<<<<<<< HEAD
-# tensorflow # do we really need that?
-=======
->>>>>>> b48fcad61041beccce77779385afa87934dfe0d5
 fastapi         # API framework
 uvicorn
 streamlit-chat
