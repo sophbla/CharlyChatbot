@@ -2,7 +2,7 @@
 <br />
 <div align="r">
   <a href="https://github.com/github_username/repo_name">
-    <img src="https://i.postimg.cc/hGpP5sLZ/logo-chat.png" alt="Logo" width="100" height="85">
+    <img src="https://i.postimg.cc/hGpP5sLZ/logo-chat.png" alt="Logo" width="200" height="185">
   </a>
 
 <h1 align="left">CharlyChatbot</h1>
