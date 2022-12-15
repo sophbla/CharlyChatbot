@@ -1,11 +1,20 @@
-suicide
-suicidal
-kill
-kills
-killing
-death
-dead
-murder
+want to commit suicide
+ithinking of committing suicide
+tried to commit suicide
+tried to kill myself
+have tried to kill myself
+am thinking about killing myself
+am thinking of committing suicide
+am committing suicide
+don't want to live anymore
+want my life to end
+want to be dead
+death is my only option
+i'm suicidal
+thinking of killing myself
+i want to kill
+been raped
+need to be dead
 self-murder
 self murder
 self-slaughter
@@ -25,9 +34,9 @@ fall off a bridge
 falling off a bridge
 hang myself
 hanging myself
-hang up
-hanging up
 take sleeping pills
 taking sleeping pills
 not want to wake up
 no longer want to wake up
+don't want to wake up
+never want to wake up again
