@@ -131,6 +131,7 @@ text = "I am thinking of killing myself every day"
 history = ""
 output, history, end_dialog = predict_with_filters(text, history)
 
+
 print(output)
 print(history)
 print(end_dialog)

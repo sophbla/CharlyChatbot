@@ -1,11 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+<<<<<<< HEAD
 
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import BlenderbotTokenizer, BlenderbotForConditionalGeneration
 from project_mhconvai.ml_logic.filters import word_list, filter_words, predict_neutrality, predict_offensive, predict_emotion
 from project_mhconvai.ml_logic.model import predict_blender_output
+=======
+import sys
+from transformers import BlenderbotTokenizer, BlenderbotForConditionalGeneration
+# from project_mhconvai.ml_logic.filters import word_list, filter_trigger_words, filter_bad_words, predict_neutrality, predict_offensive
+from project_mhconvai.ml_logic.model import instantiate, predict_blender_output
+>>>>>>> b48fcad61041beccce77779385afa87934dfe0d5
 
 app = FastAPI()
 
@@ -17,6 +24,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
+<<<<<<< HEAD
 print('---New---')
 tokenizer_neut = AutoTokenizer.from_pretrained("cardiffnlp/twitter-roberta-base-sentiment")
 print('#### Instantiated neutrality filter tokenizer')
@@ -97,11 +105,21 @@ def predict_with_filters(text="", history=""):
     # If neither triggers nor bad words are present, and if the user input is not neutral: generate a model output
 
     # Create input for model from dialog history and user input
+=======
+tokenizer_blend, model_blend = instantiate(BlenderbotTokenizer, BlenderbotForConditionalGeneration, "facebook/blenderbot-400M-distill")
+
+@app.get("/predict")
+def predict(text="", history=""):
+    global tokenizer_blend
+    global model_blend
+
+>>>>>>> b48fcad61041beccce77779385afa87934dfe0d5
     model_input = ' '.join((history, text))
 
     # Get first model response
     output = predict_blender_output(model_input, tokenizer_blend, model_blend)
 
+<<<<<<< HEAD
     # Prepare model output for the offensive language filter
     output_test = output.replace('<s>','')
     output_test = output_test.replace('</s>','')
@@ -127,6 +145,13 @@ def predict_with_filters(text="", history=""):
     new_history = ' '.join((history, text, output))
     end_dialog = False
     return dict(output=output, new_history=new_history, end_dialog=end_dialog)
+=======
+    new_history = ''.join((history, text, output))
+    end_dialog = False
+
+    return dict(output=output, new_history=new_history, end_dialog=end_dialog)
+
+>>>>>>> b48fcad61041beccce77779385afa87934dfe0d5
 
 @app.get("/")
 def root():
