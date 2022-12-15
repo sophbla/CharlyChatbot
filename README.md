@@ -43,10 +43,10 @@
 <!-- TEAM -->
 <h1 align="left">Team</h1>
 <ul>
-  <li>Ann-Sophie Blank @sophbla</li>
-  <li>Thomas Martin @trmbmartin</li>
-  <li>Veronika Chakraverty @VeroChak</li>
-  <li>Alissa Huynh @alissanh</li>
+  <li>Ann-Sophie Blank <a href="https://github.com/sophbla">@sophbla</a> </li>
+  <li>Thomas Martin <a href="https://github.com/trmbmartin">@trmbmartin</a> </li>
+  <li>Veronika Chakraverty <a href="https://github.com/VeroChak">@VeroChak</a> </li>
+  <li>Alissa Huynh <a href="https://github.com/alissanh">@alissanh</a> </li>
 </ul>
 
 <h1 align="left">Disclaimer</h1>
