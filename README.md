@@ -2,7 +2,7 @@
 <br />
 <div align="r">
   <a href="https://github.com/github_username/repo_name">
-    <img src="https://i.postimg.cc/hGpP5sLZ/logo-chat.png" alt="Logo" width="100" height="85">
+    <img src="https://i.postimg.cc/hGpP5sLZ/logo-chat.png" alt="Logo" width="200" height="185">
   </a>
 
 <h1 align="left">CharlyChatbot</h1>
@@ -38,15 +38,13 @@
 
 [![dogs.gif](https://i.postimg.cc/HxVVsj2h/dogs.gif)](https://sophbla-charlychatbot-fe-streamlit-67v0jm.streamlit.app/)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- TEAM -->
 <h1 align="left">Team</h1>
 <ul>
-  <li>Ann-Sophie Blank @sophbla</li>
-  <li>Thomas Martin @trmbmartin</li>
-  <li>Veronika Chakraverty @VeroChak</li>
-  <li>Alissa Huynh @alissanh</li>
+  <li><a href="https://github.com/sophbla">Ann-Sophie Blank</a></li>
+  <li><a href="https://github.com/trmbmartin">Thomas Martin </a> </li>
+  <li><a href="https://github.com/VeroChak">Veronika Chakraverty </a> </li>
+  <li><a href="https://github.com/alissanh">Alissa Huynh </a> </li>
 </ul>
 
 <h1 align="left">Disclaimer</h1>
