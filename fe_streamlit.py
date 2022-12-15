@@ -55,7 +55,7 @@ div.stButton > button:active {
 f1, f2 = st.columns([3,0.7])
 with f1:
     #Side bar button
-    if st.button('Close sidebar'):
+    if st.button('Toggle sidebar'):
         st.session_state.sidebar_state = 'expanded' if st.session_state.sidebar_state == 'collapsed' else 'collapsed'
         # Force an app rerun after switching the sidebar state.
         st.experimental_rerun()
@@ -106,8 +106,8 @@ if st.session_state['generated']:
 
     for i in range(0, len(st.session_state['generated'])):
         output_message = re.sub(r'<.*?>', '', st.session_state['generated'][i])
-        message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
-        message(output_message, key=str(i))
+        message(st.session_state['past'][i], avatar_style='micah', seed = 45, is_user=True, key=str(i) + '_user')
+        message(output_message, avatar_style='croodles-neutral', seed = 45, key=str(i))
 
 
 
@@ -157,7 +157,7 @@ with st.sidebar:
     - Type a sentence of your choice
     - Wait for Charly's answer
     - That's it!
-    To learn more, visit our [Github Page]("https://github.com/sophbla/MHConvoAI").
+    To learn more, visit our [Github Page](https://github.com/sophbla/CharlyChatbot.git).
 
 
 
