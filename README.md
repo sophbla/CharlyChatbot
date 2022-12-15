@@ -38,8 +38,6 @@
 
 [![dogs.gif](https://i.postimg.cc/HxVVsj2h/dogs.gif)](https://sophbla-charlychatbot-fe-streamlit-67v0jm.streamlit.app/)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- TEAM -->
 <h1 align="left">Team</h1>
 <ul>
