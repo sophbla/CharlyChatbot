@@ -51,5 +51,5 @@
 
 <h1 align="left">Disclaimer</h1>
 <p align='left'>
-All content and information on this website if for informational and educational purposes only and does NOT constitute medical advice.
+Disclaimer: All content and information on this website if for informational and educational purposes only and does NOT constitute medical advice.
 </p>
