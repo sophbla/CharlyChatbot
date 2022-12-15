@@ -55,7 +55,7 @@ div.stButton > button:active {
 f1, f2 = st.columns([3,0.7])
 with f1:
     #Side bar button
-    if st.button('Close sidebar'):
+    if st.button('Toggle sidebar'):
         st.session_state.sidebar_state = 'expanded' if st.session_state.sidebar_state == 'collapsed' else 'collapsed'
         # Force an app rerun after switching the sidebar state.
         st.experimental_rerun()
